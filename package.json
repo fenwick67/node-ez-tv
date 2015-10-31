@@ -1,0 +1,32 @@
+{
+  "name": "node-vlc-tv",
+  "version": "0.0.1",
+  "description": "A TV station for your home, using node.js and libvlc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fenwick67/node-vlc-tv.git"
+  },
+  "keywords": [
+    "tv",
+    "television",
+    "vlc",
+    "nodejs",
+    "node"
+  ],
+  "author": "Drew Harwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fenwick67/node-vlc-tv/issues"
+  },
+  "homepage": "https://github.com/fenwick67/node-vlc-tv",
+  "dependencies": {
+    "glob": "^5.0.15",
+    "node-schedule": "^0.2.9",
+    "pathspec": "^0.9.2",
+    "vlc": "git://github.com/fenwick67/node-vlc.git"
+  }
+}

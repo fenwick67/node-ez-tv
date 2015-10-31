@@ -1,0 +1,18 @@
+{
+  "jobs":[
+    {
+      "name":"Simpsons",
+      "cron":"0,15,30,45 * * * * *",
+      "pathspec":"/home/drew/clip.mp4"
+    }
+  ],
+  "commercials":[
+    {
+      "name":"1990s commercials",
+      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/Simpsons/Season 3/312 - I Married Marge.mkv"
+    }
+  ],
+  "options":{
+
+  }
+}
