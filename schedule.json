@@ -2,8 +2,25 @@
   "jobs":[
     {
       "name":"Simpsons",
-      "cron":"0,30 * * * *",
-      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/Simpsons/*/*.mkv"
+      "cron":[
+        "0 * * * *"
+      ],
+      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/Simpsons/*/*.mkv",
+      "repeat":false,
+      "runtime":23,
+      "order":"random",
+      "episodeStartIndex":"random"
+    },
+    {
+      "name":"King of the Hill",
+      "cron":[
+        "30 * * * *"
+      ],
+      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/King of the Hill/*/*.avi",
+      "repeat":false,
+      "runtime":23,
+      "order":"random",
+      "episodeStartIndex":"random"
     }
   ],
   "commercials":[

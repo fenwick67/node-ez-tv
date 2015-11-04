@@ -4,7 +4,8 @@
   "description": "A TV station for your home, using node.js and libvlc",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,13 @@
   },
   "homepage": "https://github.com/fenwick67/node-vlc-tv",
   "dependencies": {
+    "cron-parser": "^1.0.1",
+    "express": "^4.13.3",
     "glob": "^5.0.15",
+    "lodash": "^3.10.1",
     "node-schedule": "^0.2.9",
     "pathspec": "^0.9.2",
+    "serve-static": "^1.10.0",
     "vlc": "git://github.com/fenwick67/node-vlc.git"
   }
 }
