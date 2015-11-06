@@ -1,0 +1,122 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <style type="text/css">
+      *{
+        font-family: sans-serif;
+
+        shape-rendering: crispEdges;
+      }
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: black;
+      }
+
+      .axis text {
+        font-size: 18px;
+      }
+
+      .timeline-label {
+        font-size: 18px;
+        text-align:right;
+        width:100px;
+      }
+
+      svg.scrollable {
+        cursor:ew-resize;
+      }
+
+      .coloredDiv {
+        height: 20px;
+        width: 20px;
+        float: left;
+      }
+      .betterlabel{
+        height:200px;
+        width:100px;  
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/jiahuang/d3-timeline/master/src/d3-timeline.js"></script>
+    <div id="timeline"></div>
+
+    <script>
+$.get('/guide.json',updateTimeline);
+//window.setInterval(function(){$.get('/guide.json',updateTimeline);},10000);
+
+function updateTimeline(guideData){
+
+var shows = {};
+var chartData = [];
+for(var i = 0; i < guideData.length; i ++){
+  if(!shows[guideData[i].name]){
+    shows[guideData[i].name] = {label:guideData[i].name,times:[]};
+  }
+  var start = new Date(guideData[i].date).getTime()
+  var end = new Date(guideData[i].endDate).getTime()
+  var hr = (((new Date(start).getHours() +11) % 12)+1);
+  var mn = ('0'+(new Date(start).getMinutes()) ).slice(-2);
+  var label = hr+':'+mn;
+  shows[guideData[i].name].times.push({
+    starting_time:start,
+    ending_time:end,
+    label:label,
+    class:'show-label'
+  });
+  
+}
+
+var showNames = Object.keys(shows);
+for(var i = 0; i < showNames.length; i++){
+  chartData.push(shows[showNames[i]]);
+}
+//console.log(chartData);
+var chart = d3.timeline()
+.margin({left:110, right:30, top:10, bottom:0})
+.width(10000)
+.stack()
+.showTimeAxisTick()
+.beginning(new Date())
+
+var tl = d3.select("#timeline");
+var svg = tl.append("svg").attr("width", 1000);
+
+svg.datum(chartData).call(chart);
+
+var textWidth =0;
+var svgHeight = 100;
+svg.selectAll("text.timeline-label")
+.each(function () {
+  textWidth = Math.max( this.getComputedTextLength(),textWidth );
+});
+
+svg.each(function(){
+  svgHeight = Number(this.getAttribute('height'));
+});
+
+var coverRect = svg
+ .insert("rect",'.timeline-label')
+ .attr("x", 0)
+ .attr("y", 0)
+ .attr("width", textWidth+5)
+ .attr("height", svgHeight)
+ .style("fill", "rgba(255,255,255,1)")
+
+var eatRect =  svg
+ .insert('rect','.timeline-label')
+ .attr('x',textWidth+4)
+ .attr('y','0')
+ .attr('height','100%')
+ .attr('width','1')
+ .attr('fill','black')
+
+}
+
+
+
+    </script>
+  </body>
+</html>
