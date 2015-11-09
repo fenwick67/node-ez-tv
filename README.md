@@ -13,7 +13,9 @@ Gives you a simple schedule timeline on the local web
 ## Setup
 * Install nodejs, of course
 * Install VLC (or install OMXPlayer on raspbian)
-* `$ npm install node-ez-tv` to install locally, or `npm install -g node-ez-tv`to install globally
+* `$ git clone https://github.com/fenwick67/node-ez-tv.git`
+* `$ cd node-ez-tv`
+* `$ npm install`
   * *Note:* the VLC library used within requires node-gyp to be in working order to install... but on Raspberry Pi it won't matter because OMXPlayer is used instead, in which case ignore those warnings.
 * (optional) set `PORT` environment variable to a port for the web guide interface
 
