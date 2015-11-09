@@ -1,5 +1,5 @@
 {
-  "name": "node-vlc-tv",
+  "name": "node-ez-tv",
   "version": "0.0.1",
   "description": "A TV station for your home, using node.js and libvlc",
   "main": "index.js",
@@ -9,21 +9,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fenwick67/node-vlc-tv.git"
+    "url": "https://github.com/fenwick67/node-ez-tv.git"
   },
   "keywords": [
     "tv",
     "television",
     "vlc",
     "nodejs",
-    "node"
+    "node",
+    "omxplayer",
+    "media",
+    "video"
   ],
   "author": "Drew Harwell",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fenwick67/node-vlc-tv/issues"
+    "url": "https://github.com/fenwick67/node-ez-tv/issues"
   },
-  "homepage": "https://github.com/fenwick67/node-vlc-tv",
+  "homepage": "https://github.com/fenwick67/node-ez-tv",
   "dependencies": {
     "cron-parser": "^1.0.1",
     "express": "^4.13.3",
