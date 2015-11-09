@@ -1,7 +1,6 @@
-var vlc = require('vlc')
-  , schedule = require('node-schedule')
+var schedule = require('node-schedule')
   , cronParser = require('cron-parser')
-  , tvPlayer = require('./lib/tv-player')(vlc)
+  , tvPlayer = require('./lib/tv-player')
   , fs = require('fs')
   , pathspec = require('pathspec')
   , glob = require('glob')
@@ -35,6 +34,7 @@ var app = express();
     }
   }
 */
+
 var schedule;
 
 fs.readFile(__dirname + '/schedule.json','utf8',function(er,data){
@@ -58,7 +58,7 @@ fs.readFile(__dirname + '/schedule.json','utf8',function(er,data){
 
     var guide = guideGen(schedule);
     //console.log('next show: ',guide.getNext());
-    console.log('schedule: ',guide.getGuide());
+   //console.log('schedule: ',guide.getGuide());
   }
 });
 
