@@ -10,7 +10,7 @@ var schedule = require('node-schedule')
   , express = require('express')
   , serveStatic = require('serve-static');
 
-var app = express();
+
 
 /*
   schedule.json format:
@@ -35,9 +35,24 @@ var app = express();
   }
 */
 
-var schedule;
+/*
+  call this program with schedule.json filename
 
-fs.readFile(__dirname + '/schedule.json','utf8',function(er,data){
+  OR just modify the schedule.json default file
+
+*/
+
+var schedule;
+var scheduleFile;
+
+if(process.argv[2]){
+  scheduleFile = process.argv[2];
+}else{
+  scheduleFile = __dirname + '/schedule.json';
+}
+
+
+fs.readFile(scheduleFile,'utf8',function(er,data){
   if(er){
     throw new Error('could not read schedule.json');
   } else {
@@ -48,7 +63,7 @@ fs.readFile(__dirname + '/schedule.json','utf8',function(er,data){
       throw new Error('failed to parse schedule fron JSON');
     }
 
-    // configure libVLC player
+    // register commercials
     tvPlayer.registerCommercials(schedule.commercials);
 
     // schedule shows to play per schedule.json
@@ -57,20 +72,30 @@ fs.readFile(__dirname + '/schedule.json','utf8',function(er,data){
     tvPlayer.run(schedule.options);
 
     var guide = guideGen(schedule);
-    //console.log('next show: ',guide.getNext());
-   //console.log('schedule: ',guide.getGuide());
+    // console.log('next show: ',guide.getNext());
+    // console.log('schedule: ',guide.getGuide());
+
+    expressApp();
   }
 });
 
-app.get('/guide.json',function(req,res){
-  var guide = guideGen(schedule).getGuide();
-  res.send(guide);
-});
+function expressApp(){
+  var app = express();
 
-app.get('/next.json',function(req,res){
-  var next = guideGen(schedule).getNext();
-  res.send(next);
-});
+  app.get('/guide.json',function(req,res){
+    var guide = guideGen(schedule).getGuide();
+    res.send(guide);
+  });
 
-app.use(serveStatic('public'));
-app.listen(8000);
+  app.get('/next.json',function(req,res){
+    var next = guideGen(schedule).getNext();
+    res.send(next);
+  });
+
+  app.use( serveStatic('public') );
+
+  var port = process.env.PORT || 8000;
+  app.listen(port,function(){
+    console.log('listening on port ',port);
+  });
+}
