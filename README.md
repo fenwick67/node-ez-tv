@@ -6,9 +6,9 @@ You can get a composite-to-UHF adapter for pretty cheap, so actually wiring this
 ##Details
 Uses VLC, or automatically uses OMXPlayer on Raspberry Pi.
 Plays shows based on a custom schedule you create.  Schedules can be as complex or as simple as you want.
-Plays random "commercials" (files you specify) in-between scheduled shows
-Works on or offline
-Gives you a simple schedule timeline on the local web
+Plays random "commercials" (files you specify) in-between scheduled shows.  
+Works on or offline.  
+Shows you a simple guide on the local web.  
 
 ## Setup
 * Install nodejs, of course
