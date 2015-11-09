@@ -36,25 +36,25 @@ See `schedule.json` for an example
 
 ##Root elements:
 
-jobs:(Array)
-commercials:(Array)
-options(Object) (unused)
+* jobs:(Array)
+* commercials:(Array)
+* options:(Object) (unused)
 
 
 ##Jobs schema:
 
-"name":name displayed in the guide (String)
-"cron": can be a String or an Array of strings (ex: "0 20 * * *")
-"pathspec":the path spec used to find filenames (String) (ex: "/home/pi/videos/*.mkv")
-"repeat":if true, repeat episodes end-to-end
-"runtime":the length of the show in minutes (used only for the guide)
-"order":"random" shuffles order, A-z otherwise 
-"episodeStartIndex":The index from which to start playing episodes (int >= 0 or 'random')
+* "name":name displayed in the guide (String)
+* "cron": can be a String or an Array of strings (ex: "0 20 * * *")
+* "pathspec":the path spec used to find filenames (String) (ex: "/home/pi/videos/*.mkv")
+* "repeat":if true, repeat episodes end-to-end
+* "runtime":the length of the show in minutes (used only for the guide)
+* "order":"random" shuffles order, A-z otherwise 
+* "episodeStartIndex":The index from which to start playing episodes (int >= 0 or 'random')
 
 ###Commercials schema:
 
-"name":(String) (unused)
-"pathspec":the path spec used to find the filenames (String)
+* "name":(String) (unused)
+* "pathspec":the path spec used to find the filenames (String)
 
 #Future Developments
 These are ideas, PRs welcome!
