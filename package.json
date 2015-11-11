@@ -1,6 +1,6 @@
 {
   "name": "node-ez-tv",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A TV station for your home, using node.js and libvlc",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "tv",
     "television",
     "vlc",
+    "libvlc",
     "nodejs",
     "node",
     "omxplayer",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/fenwick67/node-ez-tv",
   "dependencies": {
+    "colors": "^1.1.2",
     "cron-parser": "^1.0.1",
     "express": "^4.13.3",
     "glob": "^5.0.15",
@@ -35,9 +37,14 @@
     "node-schedule": "^0.2.9",
     "omx-manager": "0.0.3",
     "pathspec": "^0.9.2",
-    "serve-static": "^1.10.0"
+    "serve-static": "^1.10.0",
+    "yargs": "^3.29.0"
   },
-  "optionalDependencies":{
+  "optionalDependencies": {
     "vlc": "git://github.com/fenwick67/node-vlc.git"
+  },
+  "bin": {
+    "node-ez-tv": "./index.js",
+    "node-tv": "./index.js"
   }
 }
