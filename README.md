@@ -11,34 +11,20 @@ Works on or offline.
 Shows you a simple guide on the local web.  
 
 ## Setup
-* Install nodejs, of course
+* Install nodejs and npm, of course
 * Install VLC (or install OMXPlayer on raspbian)
-* `$ git clone https://github.com/fenwick67/node-ez-tv.git`
-* `$ cd node-ez-tv`
-* `$ npm install`
-  * *Note:* the VLC library used within requires node-gyp to be in working order to install... but on Raspberry Pi it won't matter because OMXPlayer is used instead, in which case ignore those warnings.
-* (optional) set `PORT` environment variable to a port for the web guide interface
+* `$ sudo npm install -g node-ez-tv`
+* run `node-ez-tv [your schedule file]` or simply `node-tv`
 
-# Running the TV Station
+# Schedule Format
 
-## Method 1
-* Modify `schedule.json` with your preferred schedule
-* run `index.js`
-
-## Method 2
-* Create your own schedule JSON file
-* run `index.js` with the JSON file as the first command-line parameter:
-`node-ez-tv ~/path/to/schedule.json`
-
-# schedule.json Format
-
-See `schedule.json` for an example
+See `schedule.json` for an example.  The most important thing to remember is that the paths are absolute.
 
 ##Root elements:
 
 * jobs:(Array)
 * commercials:(Array)
-* options:(Object) (unused)
+* options:(Object) (unused for now)
 
 
 ##Jobs schema:
@@ -47,11 +33,11 @@ See `schedule.json` for an example
 * "cron": can be a String or an Array of strings (ex: "0 20 * * *")
 * "pathspec":the path spec used to find filenames (String) (ex: "/home/pi/videos/*.mkv")
 * "repeat":if true, repeat episodes end-to-end
-* "runtime":the length of the show in minutes (used only for the guide)
-* "order":"random" shuffles order, A-z otherwise 
+* "runtime":the length of the show in minutes (used for the guide)
+* "order":"random" shuffles order, A-z otherwise
 * "episodeStartIndex":The index from which to start playing episodes (int >= 0 or 'random')
 
-###Commercials schema:
+##Commercials schema:
 
 * "name":(String) (unused)
 * "pathspec":the path spec used to find the filenames (String)
@@ -67,6 +53,7 @@ These are ideas, PRs welcome!
 
 #Resources
 [Public Domain TV Commercials](https://archive.org/details/classic_tv_commercials)
+
 [Public Domain Movies](https://archive.org/details/SciFi_Horror)
 
 #License
