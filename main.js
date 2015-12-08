@@ -106,7 +106,7 @@ module.exports=function(options){
       res.send(next);
     });
 
-    app.use( serveStatic('public') );
+    app.use( serveStatic(__dirname + '/public') );
 
     var port = options.port || process.env.PORT || 8000;
     app.listen(port,function(){

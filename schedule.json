@@ -3,20 +3,9 @@
     {
       "name":"Simpsons",
       "cron":[
-        "0 * * * *"
+        "* * * * *"
       ],
-      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/Simpsons/*/*.mkv",
-      "repeat":false,
-      "runtime":23,
-      "order":"random",
-      "episodeStartIndex":"random"
-    },
-    {
-      "name":"King of the Hill",
-      "cron":[
-        "30 * * * *"
-      ],
-      "pathspec":"/media/EA14B48F14B45FED/Users/Drew/Videos/King of the Hill/*/*.avi",
+      "pathspec":"E:/Users/Drew/Videos/Simpsons/*/*.mkv",
       "repeat":false,
       "runtime":23,
       "order":"random",
@@ -26,7 +15,7 @@
   "commercials":[
     {
       "name":"1990s commercials",
-      "pathspec":"/home/drew/Downloads/Bustin.mp4"
+      "pathspec":"E:/Users/Drew/Videos/Mandrill Maze.flv"
     }
   ],
   "options":{
