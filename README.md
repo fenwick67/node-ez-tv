@@ -8,7 +8,8 @@ Uses VLC, or uses OMXPlayer on Raspberry Pi (when `process.env.USER === 'pi'`).
 Plays shows based on a custom schedule you create.  Schedules can be as complex or as simple as you want.
 Plays random "commercials" (files you specify) in-between scheduled shows.  
 Works on or offline.  
-Shows you a simple guide on the local web.  
+
+Shows you a simple guide on the local web.  TV show / movie descriptions are loaded from the OMDB API.
 
 ## Setup
 * Install nodejs and npm, of course
@@ -52,7 +53,6 @@ These are ideas, PRs welcome!
 * On restart, start the video that should be running right now and seek forward into it
 * Job priority levels for special schedules
 * Admin web interface for modifying schedule, playing videos on-the-fly etc.
-* describe TV shows on webpage using OMDB API
 
 #Resources
 [Public Domain TV Commercials](https://archive.org/details/classic_tv_commercials)
