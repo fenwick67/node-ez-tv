@@ -47,8 +47,12 @@ module.exports=function(options){
 
   */
 
+  
+  //globals
   var schedule;
   var scheduleFile;
+  var guide = [];
+  var guideNext = {};
 
   if(options.file){
     scheduleFile = options.file;
@@ -76,6 +80,9 @@ module.exports=function(options){
       });
 
       schedule =  JSON.parse(data);
+      
+      // set timeout to generate new guide every minute
+      setInterval(newGuide,60000);
 
       // register commercials
       tvPlayer.registerCommercials(schedule.commercials);
@@ -85,24 +92,35 @@ module.exports=function(options){
       tvPlayer.registerShows(schedule.jobs);
       tvPlayer.run(schedule.options);
 
-      var guide = guideGen(schedule);
-      // console.log('next show: ',guide.getNext());
-      // console.log('schedule: ',guide.getGuide());
-
+      // generate a new guide right now
+      newGuide();
+      
+      // launch express app
       expressApp();
+      
     }
   });
 
+  function newGuide(){
+    var generator = guideGen(schedule);
+    guide = generator.getGuide();  
+    guideNext = generator.getNext();
+  }
+  
   function expressApp(){
     var app = express();
+    
+    function lightCaching(req,res,next){
+      res.setHeader('Cache-Control', 'max-age=300');
+      next();
+    }
 
-    app.get('/guide.json',function(req,res){
-      var guide = guideGen(schedule).getGuide();
+    app.get('/guide.json',lightCaching,function(req,res){
       res.send(guide);
     });
 
     app.get('/next.json',function(req,res){
-      var next = guideGen(schedule).getNext();
+      
       res.send(next);
     });
 
@@ -113,4 +131,6 @@ module.exports=function(options){
       console.log('listening on port ',port);
     });
   }
+  
+  
 }
