@@ -23,9 +23,9 @@ module.exports=function(options){
     {
       "jobs":[
         {
-          "name":"Simpsons",
+          "name":"short films",
           "cron":"0 20 * * *",
-          "pathspec":"~/videos/simpsons/*.mp4"
+          "pathspec":"~/videos/shortfilms/*.mp4"
         }
       ],
       "commercials":[

@@ -1,24 +1,28 @@
 {
   "jobs":[
     {
-      "name":"Simpsons",
+      "name":"Santa Claus Conquers The Martians",
       "cron":[
-        "* * * * *"
+        "0 0,4,8,12,16,20 * * *"
       ],
-      "pathspec":"E:/Users/Drew/Videos/Simpsons/*/*.mkv",
-      "repeat":false,
-      "runtime":23,
-      "order":"random",
-      "episodeStartIndex":"random"
+      "pathspec":"~/videos/Santa Claus Conquers The Martians.mp4",
+      "runtime":80,
+      "mediaType":"movie"
+    },{
+      "name":"Plan 9 from Outer Space",
+      "cron": "0 2,6,10,14,18,22 * * *",
+      "pathspec":"~/videos/Plan 9 from Outer Space.mp4",
+      "mediaType":"movie",
+      "runtime":80
     }
   ],
   "commercials":[
     {
-      "name":"1990s commercials",
-      "pathspec":"E:/Users/Drew/Videos/Mandrill Maze.flv"
+      "name":"commercials",
+      "pathspec":"~/Videos/commercials/*"
     }
   ],
   "options":{
-
+    
   }
 }
