@@ -1,26 +1,23 @@
 # Node-EZ-TV
-The advent of the Internet has brought many useful innovations in media.  Streaming services such as Netflix have given us the ability to watch shows whenever we want.  However, you miss out on the full TV Experience!  No commercials, no schedule, too much choice!  This project allows you to set up a simple television station for your home (or even for your community or school) that runs off of local files.
+This project allows you to set up a simple television station for your home (or school, etc.).  It works with VLC or OMXPlayer.
+## Features
+* Plays shows based on a custom schedule you create.  
+* Plays random "commercials" (files you specify) in-between scheduled shows.   
+* Serves up a simple guide on the network.  Show / movie descriptions are loaded to the client from the OMDB API.  It looks like this:
 
-You can get a composite-to-UHF adapter for pretty cheap, so actually wiring this up to your cable jacks and broadcasting on channel 3 throughout your house is pretty simple with a Raspberry Pi.
-
-## Details
-Uses VLC, or uses OMXPlayer on Raspberry Pi (when `process.env.USER === 'pi'`).
-Plays shows based on a custom schedule you create.  Schedules can be as complex or as simple as you want.
-Plays random "commercials" (files you specify) in-between scheduled shows.  
-Works on or offline.  
-
-Shows you a simple guide on the local web.  TV show / movie descriptions are loaded from the OMDB API.
+![web interface screenshot](https://fenwick67.github.io/img/node-ez-tv%20capture.PNG)
 
 ## Setup
-* Install nodejs and npm, of course
+* Install nodejs and npm
 * Install VLC (or install OMXPlayer on raspbian)
  * Make sure VLC is in your PATH
-* `$ sudo npm install -g node-ez-tv`
-* run `node-ez-tv [your schedule file]` or `node-tv [your schedule file]`
 
-# Schedule Format
+* `sudo npm install -g node-ez-tv`
+* run `node-ez-tv [your schedule file]`, or  `node-tv [your schedule file]`
 
-See `schedule.json` for an example.  Paths are absolute.
+# Creating a Schedule File
+
+See `schedule.json` as an example for a quick start.  Paths are absolute.
 
 ## Root elements:
 
@@ -29,35 +26,44 @@ See `schedule.json` for an example.  Paths are absolute.
 * options:(Object) (unused for now)
 
 
-## Jobs schema:
+## "jobs" format:
 
-* "name":name displayed in the guide (String)
-* "cron": can be a String or an Array of strings (ex: "0 20 * * *")
-* "pathspec":the path spec used to find filenames (String) (ex: "/home/pi/videos/*.mkv")
-* "repeat":(optional) if true, repeat episodes end-to-end
-* "runtime":(optional) the length of the show in minutes (used for the guide)
-* "order":(optional) set to "random" to shuffle order, A-z otherwise
-* "episodeStartIndex": (optional) The index from which to start playing episodes (int >= 0 or 'random')
-* "mediaType": (optional) the type of media (may eventually be used for OMDB API)
+* `name`:name displayed in the guide (String)
+* `cron` The cron-style scheduling string.  Can be a String or an Array of Strings (ex: "0 20 * * *") for more complex schedules.
+ * check out the `cron` module docs for more info on cron format
 
-## Commercials schema:
+* `pathspec`:the path spec used to find the video file(s) (String) (ex: "/home/pi/videos/*.mkv").  
+ * look at the `glob` module docs for more info on formatting
+*  `runtime`:(recommended) the length of the show in minutes (used for the guide but not strictly required)
+* `mediaType`: (optional) either `"movie"` or `"show"`.  Used to improve accuracy of OMDB API calls for the guide.
+* `repeat`:(optional) if true, repeat episodes end-to-end instead of playing commercials.
+* `order`:(optional) set to "random" to shuffle order, A-z otherwise
+* `episodeStartIndex`: (optional) The index from which to start playing episodes (int >= 0 or 'random')
+* `mediaType`: (optional) the type of media (may eventually be used for OMDB API)
 
-* "name":(String) (completely unused)
-* "pathspec":the path spec used to find the filenames (String)
+## "commercials" format:
+
+* `pathspec`: the path spec used to find the file(s) (String) 
+* `name`:(unused for now)
 
 # Future Developments
-These are ideas, PRs welcome!
+These are ideas.  PRs welcome, have at it!
 
 * Auto-restart on crash
-* Store the last episode played in a series, so that when restarting, it doesn't reset the episode index
-* On restart, start the video that should be running right now and seek forward into it
+* Store the last episode played in a series, so that when restarting, the episode index isn't reset
 * Job priority levels for special schedules
-* Admin web interface for modifying schedule, playing videos on-the-fly etc.
+* Admin web interface for modifying schedule, playing videos on-the-fly, marathons, etc.
+* Play web video streams
+* Schedule creation tool
 
-# Resources
+# TV Content
 [Public Domain TV Commercials](https://archive.org/details/classic_tv_commercials)
 
 [Public Domain Movies](https://archive.org/details/SciFi_Horror)
 
+# Why?
+Netflix and other streaming services eat up your data and have a limited selection.  There's also nothing good on real TV.
+
+So I created this for my living room to run on a Raspberry Pi and play what I want, all day long.
 # License
 MIT
