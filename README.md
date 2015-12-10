@@ -3,7 +3,7 @@ The advent of the Internet has brought many useful innovations in media.  Stream
 
 You can get a composite-to-UHF adapter for pretty cheap, so actually wiring this up to your cable jacks and broadcasting on channel 3 throughout your house is pretty simple with a Raspberry Pi.
 
-##Details
+## Details
 Uses VLC, or uses OMXPlayer on Raspberry Pi (when `process.env.USER === 'pi'`).
 Plays shows based on a custom schedule you create.  Schedules can be as complex or as simple as you want.
 Plays random "commercials" (files you specify) in-between scheduled shows.  
@@ -22,14 +22,14 @@ Shows you a simple guide on the local web.  TV show / movie descriptions are loa
 
 See `schedule.json` for an example.  Paths are absolute.
 
-##Root elements:
+## Root elements:
 
 * jobs:(Array)
 * commercials:(Array)
 * options:(Object) (unused for now)
 
 
-##Jobs schema:
+## Jobs schema:
 
 * "name":name displayed in the guide (String)
 * "cron": can be a String or an Array of strings (ex: "0 20 * * *")
@@ -40,12 +40,12 @@ See `schedule.json` for an example.  Paths are absolute.
 * "episodeStartIndex": (optional) The index from which to start playing episodes (int >= 0 or 'random')
 * "mediaType": (optional) the type of media (may eventually be used for OMDB API)
 
-##Commercials schema:
+## Commercials schema:
 
 * "name":(String) (completely unused)
 * "pathspec":the path spec used to find the filenames (String)
 
-#Future Developments
+# Future Developments
 These are ideas, PRs welcome!
 
 * Auto-restart on crash
@@ -54,10 +54,10 @@ These are ideas, PRs welcome!
 * Job priority levels for special schedules
 * Admin web interface for modifying schedule, playing videos on-the-fly etc.
 
-#Resources
+# Resources
 [Public Domain TV Commercials](https://archive.org/details/classic_tv_commercials)
 
 [Public Domain Movies](https://archive.org/details/SciFi_Horror)
 
-#License
+# License
 MIT
