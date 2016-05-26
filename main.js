@@ -50,56 +50,80 @@ module.exports=function(options){
   
   //globals
   var schedule;
-  var scheduleFile;
   var guide = [];
   var guideNext = {};
 
-  if(options.file){
-    scheduleFile = options.file;
+  if(options.file){    
+    var scheduleFile = options.file;
+        fs.readFile(scheduleFile,'utf8',function(er,data){
+      if(er){
+        throw new Error('could not read schedule file'+scheduleFile);
+      } else {     
+          runWithSchedule(data);        
+      }
+    });
   }else{
     scheduleFile = __dirname + '/schedule.json';
   }
 
+  
+  
+  function runWithSchedule(data){
+    // validate schedule data
+    // it's actually synchronous shhh
+    scheduleValidator.validate(data,function(error,nbds){
+      if(error){
+        throw new Error(error);
+      }
+      else if(nbds && nbds.length > 0){
+        console.log( ('SCHEDULE WARNINGS:::::\n'+(nbds.join('\n'))).yellow );
+      }else{
+        console.log('schedule checks all OK'.green);
+      }
+    });
 
-  fs.readFile(scheduleFile,'utf8',function(er,data){
-    if(er){
-      throw new Error('could not read schedule file'+scheduleFile);
-    } else {
-
-      // validate schedule data
-      // it's actually synchronous shhh
-      scheduleValidator.validate(data,function(error,nbds){
-        if(error){
-          throw new Error(error);
-        }
-        else if(nbds && nbds.length > 0){
-          console.log( ('SCHEDULE WARNINGS:::::\n'+(nbds.join('\n'))).yellow );
-        }else{
-          console.log('schedule checks all OK'.green);
-        }
-      });
-
-      schedule =  JSON.parse(data);
+    schedule =  JSON.parse(data);
+    
+    // set timeout to generate new guide every minute
+    setInterval(newGuide,60000);
+    
+    
+    // show name was specified
+    if (options.show){
       
-      // set timeout to generate new guide every minute
-      setInterval(newGuide,60000);
-
+      function normalize(str){
+        //remove whitespace and lowercase when comparing
+        return str.replace(/(\ |\_)+/ig, '').toLowerCase();
+      }
+      
+      var showNormalized = normalize(options.show);
+      var s = _.find(schedule.jobs,function(j){
+          return ( normalize(j.name).indexOf( showNormalized ) > -1 )
+        });
+        
+      if (!s){
+        throw new Error('Can\'t find specified show: '+options.show);
+      }
+      //play that show as commercials... so play them at random (not shuffled)
+      tvPlayer.registerCommercials([s]);
+      tvPlayer.clearShows();
+      
+    }else{//show was not specified, read schedule as normal
       // register commercials
       tvPlayer.registerCommercials(schedule.commercials);
-
       // schedule shows to play per schedule.json
       tvPlayer.clearShows();
       tvPlayer.registerShows(schedule.jobs);
-      tvPlayer.run(schedule.options);
-
-      // generate a new guide right now
-      newGuide();
-      
-      // launch express app
-      expressApp();
-      
     }
-  });
+
+    tvPlayer.run(schedule.options);
+
+    // generate a new guide right now
+    newGuide();
+    
+    // launch express app
+    expressApp();       
+  }
 
   function newGuide(){
     var generator = guideGen(schedule);
@@ -121,12 +145,12 @@ module.exports=function(options){
 
     app.get('/next.json',function(req,res){
       
-      res.send(next);
+      res.send(guideNext);
     });
 
     app.use( serveStatic(__dirname + '/public') );
 
-    var port = options.port || process.env.PORT || 8000;
+    var port = options.port || process.env.PORT || process.env.port || 8000;
     app.listen(port,function(){
       console.log('listening on port ',port);
     });
@@ -134,3 +158,15 @@ module.exports=function(options){
   
   
 }
+
+// catch stupid epipe errors... throw on others
+
+process.stdout.on('error',function(er){
+  if (er.code === 'EPIPE'){
+    // hon hon hon
+    return;
+  }else{
+    process.stdout.removeAllListeners();
+    process.stdout.emit('error', er);
+  }
+});
