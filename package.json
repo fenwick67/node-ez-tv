@@ -1,6 +1,6 @@
 {
   "name": "node-ez-tv",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A TV station for your home, using node.js and libvlc",
   "main": "index.js",
   "scripts": {
