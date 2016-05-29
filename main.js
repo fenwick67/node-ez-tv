@@ -104,7 +104,7 @@ module.exports=function(options){
       if (!s){
         throw new Error('Can\'t find specified show: '+options.show);
       }
-      //play that show as commercials... so play them at random (not shuffled)
+      //play that show as commercials... so play them at random (not shuffled!)
       tvPlayer.registerCommercials([s]);
       tvPlayer.clearShows();
       
@@ -116,7 +116,7 @@ module.exports=function(options){
       tvPlayer.registerShows(schedule.jobs);
     }
 
-    tvPlayer.run(schedule.options);
+    tvPlayer.run(_.extend({},schedule.options,options));
 
     // generate a new guide right now
     newGuide();
@@ -138,13 +138,52 @@ module.exports=function(options){
       res.setHeader('Cache-Control', 'max-age=300');
       next();
     }
+    
+    app.get('/serverState.json',function(req,res){
+      res.json(getState());   
+    });
+    
+    app.post('/override',function(req,res){
+      
+      var doOStr = req.query.doOverride;
+      if (doOStr){
+        doOStr = doOStr.toLowerCase()
+        if(doOStr == 'false'){//don't override
+          tvPlayer.setOverrideMode(false);
+          return res.json(setOverride(false));
+        }else if (doOStr = 'true'){//do override
+          tvPlayer.setOverrideMode(true);
+          return res.json(setOverride(true));
+        }
+      }else{
+        res.status(400);
+        res.send('override parameter not specified!');
+      }
+      
+    });
+    
+    app.post('/skipEpisode',function(req,res){
+      tvPlayer.skipEpisode();
+      res.status(200);
+      res.send('ok :)');
+    });
+    
+    app.post('/playShow',function(req,res){
+      var show = req.query.show;
+      if (!show){
+        res.status(400);
+        return res.send('need to specify a show name');
+      }
+      tvPlayer.playJobByName(show);
+      res.status(200);
+      return res.send('ok :)');      
+    });
 
     app.get('/guide.json',lightCaching,function(req,res){
       res.send(guide);
     });
 
-    app.get('/next.json',function(req,res){
-      
+    app.get('/next.json',function(req,res){      
       res.send(guideNext);
     });
 
@@ -154,6 +193,19 @@ module.exports=function(options){
     app.listen(port,function(){
       console.log('listening on port ',port);
     });
+    
+
+    
+  }
+  
+  var serverState = {};
+  function getState(){
+    return serverState;      
+  }
+  function setOverride(o){
+    serverState.override = o;
+    // change the playback mode
+    return serverState;
   }
   
   
