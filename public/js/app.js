@@ -213,7 +213,7 @@ $('#override').on('click',function(){
 });
 
 $('#skip-episode').on('click',function(){
-  skipEpisode();  
+  skipEpisode();
 });
 
 serverStateUiRefresh();

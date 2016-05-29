@@ -205,6 +205,7 @@ module.exports=function(options){
   function setOverride(o){
     serverState.override = o;
     // change the playback mode
+    
     return serverState;
   }
   
