@@ -3,6 +3,7 @@ $.get('/guide.json',updateTimeline);
 //window.setInterval(function(){$.get('/guide.json',updateTimeline);},10000);
 getServerState();
 
+
 function updateTimeline(guideData){
 
   //window.guideData = guideData;
@@ -109,6 +110,20 @@ function skipEpisode(callback){
   });
 }
 
+
+function playFile(filename){
+  var callback = callback || function(){};
+  $.ajax({
+    url:'/playFile?file='+filename,
+    method:'POST',
+    success:function(){
+      return callback(null);
+    },
+    fail:function(){
+      return callback(new Error('Problem getting file'));
+    }
+  });
+}
 //get server state info
 function getServerState(callback){
 
@@ -125,6 +140,21 @@ function getServerState(callback){
       return callback(new Error('Problem getting state'));
     }
   });
+}
+
+//get episode list for show name
+function getEpisodeList(name,callback){
+  var callback = callback || function(){};
+  $.ajax({
+    url:'/episodes.json?show='+name,
+    method:'GET',
+    success:function(resJson){
+      return callback(null,resJson.files);
+    },
+    fail:function(){
+      return callback(new Error('Problem getting episode list'));
+    }
+  });  
 }
 
 //request or cancel show playback override
@@ -182,7 +212,7 @@ function updatePartyPanel(shows){
   
   for (var i = 0; i < showNames.length; i ++){
     var title = showNames[i];
-    var lihtml = '<li><b>'+title+'</b><a class="button play-button" data-show="'+title+'"></a> <a href="#" class="info-button button" data-show="'+title+'"></a></li>';
+    var lihtml = '<li><b>'+title+'</b><a class="button play-button button-sm" data-show="'+title+'"></a><a href="#" class="more-button button button-sm" data-show="'+title+'"></a><a href="#" class="info-button button button-sm" data-show="'+title+'"></a></li>';
     var l = $(lihtml);
     list.append(l);    
   } 
@@ -191,15 +221,41 @@ function updatePartyPanel(shows){
   list.on('click','a',function(event){
     var $this = $(this);
     var title = $this.data('show');    
-    // if we clicked on info button, show info    
-    updateShowPanel(title);
+    // if we clicked on info button, show info
+
+    if($this.hasClass('info-button')){
+      updateShowPanel(title);
+    }
     
-    if(!$this.hasClass('info-button')){ // play if we clicked on the orange button
+    if($this.hasClass('play-button')){ // play if we clicked on the orange button
       if (!window.serverState.override){return};
       playShow(title);
-    }   
+      updateShowPanel(title);
+    }
     
-    
+    if($this.hasClass('more-button')){
+      if (!window.serverState.override){return};
+      getEpisodeList(title,function(er,list){
+        if(er){return console.error(er);}
+        var p = $('<p></p>');
+        var ul = $('<ul></ul>');
+        
+        list.forEach(function(filename){
+          var shortname = '&#8230;/' + filename.split(/[\/,\\]/ig).slice(-3).join('/');
+          var item = $('<li><b>'+shortname+'</b><a class="play-button button button-sm" data-filename="'+filename+'"></a></li>');          
+          window.item = item;
+          ul.append(item);          
+        });
+        
+        p.append(ul);
+        
+        var $popup = $('.popup');
+        $popup.addClass('up').find('p').html(p);
+        $popup.find('h1').text(title);
+        
+      });
+    }
+      
   });
   
   $('.party-list').replaceWith(list);
@@ -214,6 +270,16 @@ $('#override').on('click',function(){
 
 $('#skip-episode').on('click',function(){
   skipEpisode();
+});
+
+// episode selection popup
+$('.popup').on('click','.close-button',function(e){
+  $(this).parent().removeClass('up');
+});
+
+$('.popup').on('click','.play-button',function(){
+  var name = $(this).data('filename');
+  playFile(name);
 });
 
 serverStateUiRefresh();

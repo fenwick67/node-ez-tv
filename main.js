@@ -139,10 +139,6 @@ module.exports=function(options){
       next();
     }
     
-    app.get('/serverState.json',function(req,res){
-      res.json(getState());   
-    });
-    
     app.post('/override',function(req,res){
       
       var doOStr = req.query.doOverride;
@@ -178,6 +174,29 @@ module.exports=function(options){
       res.status(200);
       return res.send('ok :)');      
     });
+    
+    app.post('/playFile',function(req,res){
+      var file = req.query.file;
+      if (!file){
+        res.status(400);
+        return res.send('need to specify a file');
+      }
+      tvPlayer.playFile(file);
+      res.status(200);
+      return res.send('ok :)');          
+    });
+    
+    app.get('/episodes.json',function(req,res){
+      var name = req.query.show;
+      if (!name){
+        res.status(400);
+        return res.send('need to specify a show name');
+      }
+            
+      tvPlayer.getFilesForJobName(name,function(files){
+        res.json({files:files});
+      });
+    });
 
     app.get('/guide.json',lightCaching,function(req,res){
       res.send(guide);
@@ -186,14 +205,17 @@ module.exports=function(options){
     app.get('/next.json',function(req,res){      
       res.send(guideNext);
     });
-
+    
+    app.get('/serverState.json',function(req,res){
+      res.json(getState());
+    });
+    
     app.use( serveStatic(__dirname + '/public') );
 
     var port = options.port || process.env.PORT || process.env.port || 8000;
     app.listen(port,function(){
       console.log('listening on port ',port);
-    });
-    
+    });  
 
     
   }
