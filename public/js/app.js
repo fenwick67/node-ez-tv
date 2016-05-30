@@ -244,7 +244,7 @@ function updatePartyPanel(shows){
           var shortname = '&#8230;/' + filename.split(/[\/,\\]/ig).slice(-3).join('/');
           var item = $('<li><b>'+shortname+'</b><a class="play-button button button-sm" data-filename="'+filename+'"></a></li>');          
           window.item = item;
-          ul.append(item);          
+          ul.append(item);
         });
         
         p.append(ul);
