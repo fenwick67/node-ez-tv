@@ -228,13 +228,19 @@ function updatePartyPanel(shows){
     }
     
     if($this.hasClass('play-button')){ // play if we clicked on the orange button
-      if (!window.serverState.override){return};
+      if (!window.serverState.override){
+        event.preventDefault();
+        return false;
+      };
       playShow(title);
       updateShowPanel(title);
     }
     
     if($this.hasClass('more-button')){
-      if (!window.serverState.override){return};
+      if (!window.serverState.override){
+        event.preventDefault();
+        return false;
+      };
       getEpisodeList(title,function(er,list){
         if(er){return console.error(er);}
         var p = $('<p></p>');

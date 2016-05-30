@@ -215,6 +215,8 @@ module.exports=function(options){
     var port = options.port || process.env.PORT || process.env.port || 8000;
     app.listen(port,function(){
       console.log('listening on port ',port);
+    }).on('error',function(error){
+      console.log('caught error: ',error);      
     });  
 
     
