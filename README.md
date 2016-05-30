@@ -1,5 +1,5 @@
 # Node-EZ-TV
-![logo](https://fenwick67.github.io/img/node-ez-tv%20logo.PNG)
+![logo](https://fenwick67.github.io/img/node-ez-tv%20logo.png)
 
 This project allows you to set up a simple television station for your home (or school, etc.).  It works with VLC or OMXPlayer.
 ## Features
