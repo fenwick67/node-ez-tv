@@ -273,8 +273,21 @@ $('#skip-episode').on('click',function(){
   skipEpisode();
 });
 
-$('#pause').on('click',function(){
-  submitAction('pause');
+//controls listeners
+$('#seek-forward').on('click',function(){
+  submitAction('seekForward');
+});
+
+$('#seek-fast-forward').on('click',function(){
+  submitAction('seekFastForward');
+});
+
+$('#seek-backward').on('click',function(){
+  submitAction('seekBackward');
+});
+
+$('#seek-fast-backward').on('click',function(){
+  submitAction('seekFastBackward');
 });
 
 $('#toggle-subtitles').on('click',function(){
@@ -299,6 +312,10 @@ $('#cycle-audio-back').on('click',function(){
 
 $('#play').on('click',function(){
   submitAction('play');
+})
+
+;$('#pause').on('click',function(){
+  submitAction('pause');
 });
 
 function submitAction(which,callback){
