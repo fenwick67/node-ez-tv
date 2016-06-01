@@ -222,7 +222,11 @@ module.exports=function(options){
         'cycleSubtitles',
         'cycleSubtitlesBack',
         'cycleAudio',
-        'cycleAudioBack'
+        'cycleAudioBack',
+        'seekForward',
+        'seekFastForward',
+        'seekBackward',
+        'seekFastBackward'
       ];
       
       var actionsLc = actions.map(function(s){return s.toLowerCase()});
@@ -231,7 +235,7 @@ module.exports=function(options){
       
       if (idx < 0){
         res.status(400);
-        return res.send('not a valid action');   
+        return res.send('not a valid action');
       }
       
       tvPlayer[actions[idx]](function(er){//call tvPlayer.<action> with this as its callback

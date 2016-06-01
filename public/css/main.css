@@ -24,6 +24,10 @@ h1,h2,h3,h4,h5,h6,h7,.timeline-label{
     color: white;
     padding: 0 1em;
 }
+h2{
+  background-color:#aaa;
+  margin:0;
+}
 .axis path,
 .axis line {
   fill: none;
@@ -122,6 +126,8 @@ button,.button{
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
+  margin:1em 0;
+  padding:0 1em;
 }
 .button-sm{
   margin:.5em;
@@ -172,6 +178,19 @@ button,.button{
 .cycle-audio-back-button:before{
   content:"\f060\f1ab";
 }
+.seek-forward-button:before{
+  content:"\f04e";
+}
+.seek-fast-forward-button:before{
+  content:"\f050";
+}
+.seek-backward-button:before{
+  content:"\f04a";
+}
+.seek-fast-backward-button:before{
+  content:"\f049";
+}
+
 .pause-button:before{
   content:"\f04c";
 }

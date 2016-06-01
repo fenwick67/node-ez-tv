@@ -24,23 +24,33 @@
     <div id="desc"></div>
     <div id="party">
       <h1>Controls:</h1>
-      <p>
+      <h2>Playback</h2>
         <div class="button-row">
-          <div id="skip-episode" class="button-sm button skip-button"></div>
+          <div id="seek-fast-backward" class="button-sm button seek-fast-backward-button"></div> 
+          <div id="seek-backward" class="button-sm button seek-backward-button"></div>
           <div id="pause" class="button button-sm pause-button"></div>
           <div id="play" class="button button-sm play-button"></div>
+          <div id="seek-forward" class="button-sm button seek-forward-button"></div>
+          <div id="seek-fast-forward" class="button-sm button seek-fast-forward-button"></div>
+        </div>
+        <h2>Language</h2>
+        <div class="button-row">
           <div id="toggle-subtitles" class="button button-sm toggle-subtitles-button"></div>
           <div id="cycle-subtitles-back" class="button button-sm cycle-subtitles-back-button"></div>
           <div id="cycle-subtitles" class="button button-sm cycle-subtitles-button"></div>          
           <div id="cycle-audio-back" class="button button-sm cycle-audio-back-button"></div>
           <div id="cycle-audio" class="button button-sm cycle-audio-button"></div>
         </div>
-        
-        <br>        
+        <h2>Skip</h2>
+        <div class="button-row">
+          <div id="skip-episode" class="button-sm button skip-button"></div>
+        </div>
+        <h2>Selection</h2>
         <label>Override mode: <input type="checkbox" id = "override" class="checkbox-slider checkbox-slider-primary"><b></b></label>
+        
         <ul class="party-list disabled">
+        
         </ul>
-      </p>
     </div>
     <div class="popup"><div class="close-button button button-sm"></div><div class="popup-inner">
         <h1>Popup</h1>
