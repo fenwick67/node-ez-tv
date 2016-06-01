@@ -24,16 +24,6 @@ h1,h2,h3,h4,h5,h6,h7,.timeline-label{
     color: white;
     padding: 0 1em;
 }
-#card-stack{
-  display:flex;
-  flex-wrap:wrap;
-  flex-direction:row;
-  align-items:flex-start;
-  justify-content:space-around;
-}
-#card-stack *{
-  flex:0 0 auto;
-}
 h2{
   background-color:#aaa;
   margin:0;
@@ -79,6 +69,9 @@ svg.scrollable {
 #timeline svg{
   width:100%;
 }
+#card-stack{
+  display:inline;
+}
 #desc,#party{
   margin: 1em;
   display: inline-block;
@@ -86,6 +79,7 @@ svg.scrollable {
   background-color: white;
   border: solid 1px rgba(0, 0, 0, 0.23);
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  vertical-align:top;
 }
 #desc h1,#party h1,.popup h1{
   margin:0;
