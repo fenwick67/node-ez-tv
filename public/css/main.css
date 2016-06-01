@@ -158,12 +158,19 @@ button,.button{
 .toggle-subtitles-button:before{
   content:"\f20a";
 }
+.cycle-subtitles-back-button:before{
+  font-size:1.2rem;
+  content:"\f060\f20a";
+}
 .cycle-subtitles-button:before{
   font-size:1.2rem;
   content:"\f20a\f061";
 }
 .cycle-audio-button:before{
-  content:"\f1ab";
+  content:"\f1ab\f061";
+}
+.cycle-audio-back-button:before{
+  content:"\f060\f1ab";
 }
 .pause-button:before{
   content:"\f04c";

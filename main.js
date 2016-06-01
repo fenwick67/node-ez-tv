@@ -220,7 +220,9 @@ module.exports=function(options){
         'play',
         'toggleSubtitles',
         'cycleSubtitles',
-        'cycleAudio'
+        'cycleSubtitlesBack',
+        'cycleAudio',
+        'cycleAudioBack'
       ];
       
       var actionsLc = actions.map(function(s){return s.toLowerCase()});
@@ -249,7 +251,8 @@ module.exports=function(options){
     var port = options.port || process.env.PORT || process.env.port || 8000;
     app.listen(port,function(){
       console.log('listening on port ',port);
-    }).on('error',function(error){
+    })
+    app.on('error',function(error){
       console.log('caught error: ',error);      
     });  
 
@@ -280,4 +283,9 @@ process.stdout.on('error',function(er){
     process.stdout.removeAllListeners();
     process.stdout.emit('error', er);
   }
+});
+
+process.on('uncaughtException', function(err) {
+    console.log('Uncaught exception!  File a Github issue for this:');
+    console.log(err);
 });
