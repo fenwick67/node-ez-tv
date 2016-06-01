@@ -19,14 +19,14 @@ p,h1,h2,h3,h4,h5,h6,h7,div,span{
   font-weight:lighter;
 }
 h1,h2,h3,h4,h5,h6,h7,.timeline-label{
-    font-family: "Helvetica Nueue","Roboto",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Nueue","Roboto",Helvetica,Arial,FontAwesome;
     background-color: #FF7300;
     color: white;
     padding: 0 1em;
 }
 .axis path,
 .axis line {
-  fill: none;   
+  fill: none;
   stroke: black;
 }
 
@@ -117,11 +117,18 @@ button,.button{
   cursor:pointer;
   text-decoration:none;
 }
+.button-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
 .button-sm{
   margin:.5em;
   color:white;
   border-radius:1000px;
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
   justify-content:center;
   height:1em;
@@ -129,24 +136,37 @@ button,.button{
   text-align:center;
 }
 
-.button-sm:after{  
-  font-size:1.3rem;
-  font-weight:bolder;
+.button-sm:before{  
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size:1.5rem;
 }
-.play-button:after{
-  content:'▶';
-  font-size:1.8rem;
+.play-button:before{
+  content:"\f04b";
 }
-.more-button:after{
-  content:'➕';
+.more-button:before{
+  content:"\f0ca";
 }
 .info-button{  
   background-color:#1F77B4;
 }
-.info-button:after{
-  content:'i';
-  font-size:2em;
-  font-weight:bolder;
+.info-button:before{
+  content:"\f129";
+}
+.skip-button:before{
+  content:"\f051";
+}
+.toggle-subtitles-button:before{
+  content:"\f20a";
+}
+.cycle-subtitles-button:before{
+  font-size:1.2rem;
+  content:"\f20a\f061";
+}
+.cycle-audio-button:before{
+  content:"\f1ab";
+}
+.pause-button:before{
+  content:"\f04c";
 }
 .close-button{
   background-color:#ff4444;
@@ -154,8 +174,9 @@ button,.button{
   top:0;
   right:0;
 }
-.close-button:after{
-  content:'❌';
+.close-button:before{
+  content:'\f00d';
+  font-size:2rem;
 }
 #override+b:before{
   content:" off";

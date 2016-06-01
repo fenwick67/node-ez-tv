@@ -210,6 +210,39 @@ module.exports=function(options){
       res.json(getState());
     });
     
+    app.post('/command',function(req,res){
+      req.query = req.query || {};
+      var action = req.query.action || '';
+      action = action.toLowerCase(); 
+      
+      var actions = [
+        'pause',
+        'toggleSubtitles',
+        'cycleSubtitles',
+        'cycleAudio'
+      ];
+      
+      var actionsLc = actions.map(function(s){return s.toLowerCase()});
+      
+      var idx = actionsLc.indexOf(action);
+      
+      if (idx < 0){
+        res.status(400);
+        return res.send('not a valid action');   
+      }
+      
+      tvPlayer[actions[idx]](function(er){//call tvPlayer.<action> with this as its callback
+        if(er){
+          res.status(500);
+          return res.send(er);
+        }else{
+          res.status(200);
+          return res.json(getState());
+        }
+      });      
+      
+    });
+    
     app.use( serveStatic(__dirname + '/public') );
 
     var port = options.port || process.env.PORT || process.env.port || 8000;

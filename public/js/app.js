@@ -268,14 +268,47 @@ function updatePartyPanel(shows){
   
 }
 
+//controls listeners
+$('#skip-episode').on('click',function(){
+  skipEpisode();
+});
+
+$('#pause').on('click',function(){
+  submitAction('pause');
+});
+
+$('#toggle-subtitles').on('click',function(){
+  submitAction('toggleSubtitles');
+});
+
+$('#cycle-subtitles').on('click',function(){
+  submitAction('cycleSubtitles');
+});
+
+$('#cycle-audio').on('click',function(){
+  submitAction('cycleAudio');
+});
+
+function submitAction(which,callback){
+    var callback = callback || function(){};
+    $.ajax({
+    url:'/command?action='+which,
+    method:'POST',
+    success:function(state){
+      serverState = state;
+      serverStateUiRefresh();
+      callback(null,state);
+    },
+    fail:function(){
+      return callback(new Error('Problem sending action '+which));
+    }
+  }); 
+}
+
 //party panel listeners
 $('#override').on('click',function(){
   var checking = !!$(this).prop('checked');
   requestOverride(checking,serverStateUiRefresh);
-});
-
-$('#skip-episode').on('click',function(){
-  skipEpisode();
 });
 
 // episode selection popup
@@ -287,6 +320,7 @@ $('.popup').on('click','.play-button',function(){
   var name = $(this).data('filename');
   playFile(name);
 });
+
 
 serverStateUiRefresh();
 

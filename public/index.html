@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=.75, user-scalable=no">
     <link rel="stylesheet" href="/css/checkbox-slider.css"></link>
     <link rel="stylesheet" href="/css/main.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"></link>
 
   </head>
   <body>
@@ -24,7 +25,14 @@
     <div id="party">
       <h1>Controls:</h1>
       <p>
-        <button id="skip-episode">Skip Episode</button>
+        <div class="button-row">
+          <div id="skip-episode" class="button-sm button skip-button"></div>
+          <div id="pause" class="button button-sm pause-button"></div>
+          <div id="toggle-subtitles" class="button button-sm toggle-subtitles-button"></div>
+          <div id="cycle-subtitles" class="button button-sm cycle-subtitles-button"></div>
+          <div id="cycle-audio" class="button button-sm cycle-audio-button"></div>
+        </div>
+        
         <br>        
         <label>Override mode: <input type="checkbox" id = "override" class="checkbox-slider checkbox-slider-primary"><b></b></label>
         <ul class="party-list disabled">
