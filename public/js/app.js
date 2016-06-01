@@ -289,6 +289,10 @@ $('#cycle-audio').on('click',function(){
   submitAction('cycleAudio');
 });
 
+$('#play').on('click',function(){
+  submitAction('play');
+});
+
 function submitAction(which,callback){
     var callback = callback || function(){};
     $.ajax({

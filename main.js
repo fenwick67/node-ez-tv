@@ -217,6 +217,7 @@ module.exports=function(options){
       
       var actions = [
         'pause',
+        'play',
         'toggleSubtitles',
         'cycleSubtitles',
         'cycleAudio'
