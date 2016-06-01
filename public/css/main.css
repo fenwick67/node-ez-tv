@@ -24,6 +24,16 @@ h1,h2,h3,h4,h5,h6,h7,.timeline-label{
     color: white;
     padding: 0 1em;
 }
+#card-stack{
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction:row;
+  align-items:flex-start;
+  justify-content:space-around;
+}
+#card-stack *{
+  flex:0 0 auto;
+}
 h2{
   background-color:#aaa;
   margin:0;
