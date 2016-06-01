@@ -285,8 +285,16 @@ $('#cycle-subtitles').on('click',function(){
   submitAction('cycleSubtitles');
 });
 
+$('#cycle-subtitles-back').on('click',function(){
+  submitAction('cycleSubtitlesBack');
+});
+
 $('#cycle-audio').on('click',function(){
   submitAction('cycleAudio');
+});
+
+$('#cycle-audio-back').on('click',function(){
+  submitAction('cycleAudioBack');
 });
 
 $('#play').on('click',function(){
