@@ -39,6 +39,7 @@
     "node-schedule": "1.x",
     "omx-manager": "0.0.x",
     "pathspec": "0.9.x",
+    "request": "^2.72.0",
     "serve-static": "1.x",
     "yargs": "3.x"
   },
