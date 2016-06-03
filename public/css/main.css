@@ -104,7 +104,8 @@ svg.scrollable {
   flex:0 0 0;
 }
 .party-list.disabled .play-button,.party-list.disabled .more-button{
-  background-color:#aaa;
+  background-color:#ccc;
+  color:#aaa;
   cursor:not-allowed;
   box-shadow:none;
 }
