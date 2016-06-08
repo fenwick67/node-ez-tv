@@ -38,7 +38,7 @@
     "lodash": "4.x",
     "node-schedule": "1.x",
     "omx-manager": "0.0.x",
-    "request": "2.,
+    "request": "2.x",
     "serve-static": "1.x",
     "yargs": "4.x"
   },
