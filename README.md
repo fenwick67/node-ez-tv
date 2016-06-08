@@ -23,6 +23,8 @@ This project allows you to set up a simple television station for your home (or 
 * `(sudo) npm install -g node-ez-tv`
 * run `node-ez-tv [your schedule file]`, or  `node-tv [your schedule file]`
 
+> NOTE: VLC needs to be 2.1+ for the play/pause/seek controls to work.  The language/subtitle controls do not work with VLC... sorry.
+
 # Creating a Schedule File
 
 See [`schedule.json`](https://github.com/fenwick67/node-ez-tv/blob/master/schedule.json) as an example for a quick start.  Paths are absolute.
