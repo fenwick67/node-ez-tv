@@ -290,6 +290,6 @@ process.stdout.on('error',function(er){
 });
 
 process.on('uncaughtException', function(err) {
-    console.log('Uncaught exception!  File a Github issue for this:');
+    console.log('Uncaught exception!  File a Github issue for this at   https://github.com/fenwick67/node-ez-tv/issues .:');
     console.log(err);
 });
