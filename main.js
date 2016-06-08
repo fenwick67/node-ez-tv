@@ -3,7 +3,6 @@ var schedule = require('node-schedule')
   , cronParser = require('cron-parser')
   , tvPlayer = require('./lib/tv-player')
   , fs = require('fs')
-  , pathspec = require('pathspec')
   , glob = require('glob')
   , guideGen = require('./lib/guide-gen')
   , theSchedule = {}

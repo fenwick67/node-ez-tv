@@ -1,6 +1,6 @@
 {
   "name": "node-ez-tv",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A TV station for your home, powered by Node",
   "main": "index.js",
   "scripts": {
@@ -34,14 +34,13 @@
     "colors": "1.x",
     "cron-parser": "2.x",
     "express": "4.x",
-    "glob": "5.x",
-    "lodash": "3.x",
+    "glob": "7.x",
+    "lodash": "4.x",
     "node-schedule": "1.x",
     "omx-manager": "0.0.x",
-    "pathspec": "0.9.x",
-    "request": "^2.72.0",
+    "request": "2.,
     "serve-static": "1.x",
-    "yargs": "3.x"
+    "yargs": "4.x"
   },
   "bin": {
     "node-ez-tv": "./index.js",
