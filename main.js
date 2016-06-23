@@ -70,7 +70,7 @@ module.exports=function(options){
   function getAbsoluteSchedule(scheduleFile,data){
     
     var clone = _.clone(data);
-    var startAt = path.dirname(fs.resolve(scheduleFile));
+    var startAt = path.dirname(path.resolve(scheduleFile));
     
     _.each(clone.jobs,normalizePathspec);
     _.each(clone.commercials,normalizePathspec);
