@@ -3,6 +3,7 @@ var schedule = require('node-schedule')
   , cronParser = require('cron-parser')
   , tvPlayer = require('./lib/tv-player')
   , fs = require('fs')
+  , path = require('path')
   , glob = require('glob')
   , guideGen = require('./lib/guide-gen')
   , theSchedule = {}
@@ -58,13 +59,32 @@ module.exports=function(options){
       if(er){
         throw new Error('could not read schedule file'+scheduleFile);
       } else {     
-          runWithSchedule(data);        
+          var norm = getAbsoluteSchedule(scheduleFile,data);
+          runWithSchedule(norm);        
       }
     });
   }else{
     scheduleFile = __dirname + '/schedule.json';
   }
 
+  function getAbsoluteSchedule(scheduleFile,data){
+    
+    var clone = _.clone(data);
+    var startAt = path.dirname(fs.resolve(scheduleFile));
+    
+    _.each(clone.jobs,normalizePathspec);
+    _.each(clone.commercials,normalizePathspec);
+    
+    // take an object and mutate its "pathspec" property to be absolute
+    function normalizePathspec(object){
+      if(object.pathspec){
+        object.pathspec = path.join(startAt,object.pathspec);
+      }
+    }
+    
+    return clone;
+    
+  }
   
   
   function runWithSchedule(data){
